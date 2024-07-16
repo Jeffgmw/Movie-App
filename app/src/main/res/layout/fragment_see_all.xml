@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.example.starstream.util.IntentType" />
+
+        <variable
+            name="fragment"
+            type="com.example.starstream.presentation.ui.seeall.SeeAllFragment" />
+
+        <variable
+            name="viewModel"
+            type="com.example.starstream.presentation.ui.seeall.SeeAllViewModel" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@{fragment.backgroundColor}"
+        tools:context=".presentation.ui.seeall.SeeAllFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+
+                backArrowTint="@{fragment.backgroundColor}"
+                seeAllTitle="@{fragment.title}"
+                titleTextColor="@{fragment.backgroundColor}"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@{fragment.backgroundColor}"
+                app:layout_scrollFlags="scroll|enterAlways" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                hasFixedSize="@{fragment.intentType == IntentType.LIST || fragment.intentType == IntentType.SEARCH || fragment.intentType == IntentType.GENRE}"
+                isGrid="@{true}"
+                loadMore="@{viewModel::onLoadMore}"
+                shouldLoadMore="@{fragment.intentType == IntentType.LIST || fragment.intentType == IntentType.SEARCH || fragment.intentType == IntentType.GENRE}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingStart="@dimen/start_margin_small"
+                android:paddingTop="@dimen/top_margin_small"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="vertical" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                style="@style/Loading"
+                isVisible="@{viewModel.uiState.loading}" />
+
+        </FrameLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

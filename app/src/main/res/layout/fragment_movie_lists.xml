@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View"/>
+        <import type="com.example.starstream.util.Constants" />
+        <import type="com.example.starstream.util.IntentType" />
+        <import type="com.example.starstream.util.MediaType" />
+
+        <variable
+            name="fragment"
+            type="com.example.starstream.presentation.ui.movielists.MovieListsFragment" />
+
+        <variable
+            name="viewModel"
+            type="com.example.starstream.presentation.ui.movielists.MovieListsViewModel" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.movielists.MovieListsFragment">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{viewModel.uiState.success ? View.VISIBLE : View.GONE}"
+            tools:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/bottom_margin_large">
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/vpTrendings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adapter="@{fragment.adapterTrending}" />
+
+                    <androidx.cardview.widget.CardView
+                        style="@style/TitleParent"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="@dimen/top_margin"
+                        android:layout_marginBottom="1dp"
+                        app:cardCornerRadius="24dp">
+
+                        <TextView
+                            style="@style/Title"
+                            transparentBackground="@{@color/day_night_inverse}"
+                            android:paddingStart="8dp"
+                            android:paddingTop="2dp"
+                            android:paddingEnd="8dp"
+                            android:paddingBottom="2dp"
+                            android:text="@string/title_trending" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </FrameLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout style="@style/TitleParent">
+
+                    <TextView
+                        style="@style/TitleDayNight"
+                        android:text="@string/title_popular_movies" />
+
+                    <TextView
+                        android:id="@+id/seeAllPopular"
+                        style="@style/SeeAll"
+                        intentType="@{IntentType.LIST}"
+                        mediaType="@{MediaType.MOVIE}"
+                        stringId="@{Constants.LIST_ID_POPULAR}"
+                        title="@{@string/title_popular_movies}" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvPopular"
+                    style="@style/RecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adapter="@{fragment.adapterPopular}" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout style="@style/TitleParent">
+
+                    <TextView
+                        style="@style/TitleDayNight"
+                        android:text="@string/title_top_rated_movies" />
+
+                    <TextView
+                        android:id="@+id/seeAllTopRated"
+                        style="@style/SeeAll"
+                        intentType="@{IntentType.LIST}"
+                        mediaType="@{MediaType.MOVIE}"
+                        stringId="@{Constants.LIST_ID_TOP_RATED}"
+                        title="@{@string/title_top_rated_movies}" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvTopRated"
+                    style="@style/RecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adapter="@{fragment.adapterTopRated}" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout style="@style/TitleParent">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        style="@style/TitleDayNight"
+                        android:text="@string/title_in_theatres" />
+
+                    <TextView
+                        android:id="@+id/seeAllNowPlaying"
+                        style="@style/SeeAll"
+                        intentType="@{IntentType.LIST}"
+                        android:visibility="@{viewModel.nowPlayingMovies.size > 3 ? View.VISIBLE : View.GONE}"
+                        mediaType="@{MediaType.MOVIE}"
+                        stringId="@{Constants.LIST_ID_NOW_PLAYING}"
+                        title="@{@string/title_in_theatres}" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvNowPlaying"
+                    style="@style/RecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adapter="@{fragment.adapterNowPlaying}" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout style="@style/TitleParent">
+
+                    <TextView
+                        style="@style/TitleDayNight"
+                        android:text="@string/title_upcoming_movies" />
+
+                    <TextView
+                        android:id="@+id/seeAllUpcoming"
+                        style="@style/SeeAll"
+                        intentType="@{IntentType.LIST}"
+                        mediaType="@{MediaType.MOVIE}"
+                        stringId="@{Constants.LIST_ID_UPCOMING}"
+                        title="@{@string/title_upcoming_movies}" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvUpcoming"
+                    style="@style/RecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/recyclerview_bottom_margin"
+                    android:adapter="@{fragment.adapterUpcoming}" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            style="@style/Loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.uiState.loading ? View.VISIBLE : View.GONE}" />
+
+    </FrameLayout>
+
+</layout>

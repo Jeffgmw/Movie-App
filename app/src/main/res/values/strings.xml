@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">Star Stream</string>
+
+    <string name="title_bottom_nav_bar_1">Home</string>
+    <string name="title_bottom_nav_bar_2">Search</string>
+    <string name="title_bottom_nav_bar_3">Favorites</string>
+
+    <string name="tab_title_1">StartStream Movies</string>
+
+    <string name="button_see_all">SEE ALL</string>
+
+
+    <string name="title_trending">Trending</string> /*weeek*/
+    <string name="title_popular_movies">Popular Movies</string>
+    <string name="title_top_rated_movies">Top Rated Movies</string>
+    <string name="title_in_theatres">Now Showing</string>
+    <string name="title_upcoming_movies">Upcoming Movies</string>
+
+    <string name="trending_trailer_button">Watch trailer</string>
+    <string name="trending_trailer_error">No trailer found</string>
+
+    <string name="title_genres">Genres</string>
+    <string name="title_movies">Movies</string>
+
+    <string name="bullet_point">•</string>
+    <string name="thousand_separator">,</string>
+
+    <string name="hour_short">hr</string>
+    <string name="minute_short">min</string>
+
+    <string name="detail_summary">Summary</string>
+    <string name="detail_title_trailers">Trailers</string>
+    <string name="detail_title_cast">Cast</string>
+    <string name="detail_title_images">Images</string>
+
+    <string name="detail_original_title">Original Title</string>
+    <string name="detail_release_date">Release Date</string>
+    <string name="detail_runtime">Runtime</string>
+    <string name="detail_vote_count">User Vote Count</string>
+    <string name="detail_vote_average">User Score</string>
+    <string name="detail_status">Status</string>
+    <string name="detail_genre">Genre</string>
+
+    <string name="detail_title_movie_credits">Movies</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="n_a">N/A</string>
+
+    <string name="empty_favorites_list_movie">Your favorite movies list is empty</string>
+
+    <string name="snackbar_removed_item">Removed from favorites</string>
+    <string name="snackbar_action_undo">UNDO</string>
+
+    <string name="error_connection">Unable to fetch data, please check your internet connection and try again.</string>
+    <string name="error_service">API service is not responding at the moment, please try again later.</string>
+    <string name="error_unknown">Unknown error occurred.</string>
+    <string name="button_retry">RETRY</string>
+
+    <string name="item_count">" (%d)"</string>
+    <string name="item_count_s">" (%s)"</string>
+    <string name="title_see_all_search">\"%s\" (%d)</string>
+    <string name="search_query_hint">Search movie</string>
+
+</resources>

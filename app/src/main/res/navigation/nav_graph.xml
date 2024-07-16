@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.starstream.presentation.ui.home.HomeFragment"
+        android:label="HomeFragment">
+        <action
+            android:id="@+id/action_homeFragment_to_movieListsFragment"
+            app:destination="@id/movieListsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_movieListsFragment_to_seeAllFragment"
+            app:destination="@id/seeAllFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/movieListsFragment"
+        android:name="com.example.starstream.presentation.ui.movielists.MovieListsFragment"
+        android:label="Movie Lists Fragment"
+        tools:layout="@layout/fragment_movie_lists">
+        <action
+            android:id="@+id/action_movieListsFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_movieListsFragment_to_seeAllFragment"
+            app:destination="@id/seeAllFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/movieDetailsFragment"
+        android:name="com.example.starstream.presentation.ui.moviedetails.MovieDetailsFragment"
+        android:label="fragment_movie_details"
+        tools:layout="@layout/fragment_movie_details">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="backgroundColor"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/seeAllFragment"
+        android:name="com.example.starstream.presentation.ui.seeall.SeeAllFragment"
+        android:label="SeeAllFragment">
+        <argument
+            android:name="media_type"
+            android:defaultValue="@null"
+            app:argType="com.example.starstream.util.MediaType"
+            app:nullable="true" />
+        <argument
+            android:name="listId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="region"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="videoList"
+            android:defaultValue="@null"
+            app:argType="com.example.starstream.domain.model.Video[]"
+            app:nullable="true" />
+        <argument
+            android:name="imageList"
+            android:defaultValue="@null"
+            app:argType="com.example.starstream.domain.model.Image[]"
+            app:nullable="true" />
+
+        <action
+            android:id="@+id/action_seeAllFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.starstream.presentation.ui.search.SearchFragment"
+        android:label="SearchFragment">
+        <action
+            android:id="@+id/action_searchFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_seeAllFragment"
+            app:destination="@id/seeAllFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.starstream.presentation.ui.favoritemovies.FavoritesFragment"
+        android:label="FavoritesFragment" >
+        <action
+            android:id="@+id/action_favoriteMoviesFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoriteMoviesFragment"
+        android:name="com.example.starstream.presentation.ui.favoritemovies.FavoriteMoviesFragment"
+        android:label="FavoriteMoviesFragment" >
+        <action
+            android:id="@+id/action_favoriteMoviesFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
+    </fragment>
+
+</navigation>

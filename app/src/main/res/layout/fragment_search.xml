@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.example.starstream.util.IntentType" />
+
+        <import type="com.example.starstream.util.MediaType" />
+
+        <variable
+            name="fragment"
+            type="com.example.starstream.presentation.ui.search.SearchFragment" />
+
+        <variable
+            name="viewModel"
+            type="com.example.starstream.presentation.ui.search.SearchViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".presentation.ui.search.SearchFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/ivBack"
+                isVisible="@{viewModel.isSearchInitialized}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/start_margin"
+                android:layout_marginEnd="@dimen/end_margin"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:onClick="@{() -> fragment.clearSearch()}"
+                android:src="?attr/homeAsUpIndicator"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="16dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivBack"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:iconifiedByDefault="false"
+                    android:queryHint="@string/search_query_hint" />
+
+            </androidx.cardview.widget.CardView>
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/linearProgressIndicator"
+                style="@style/Loading"
+                isVisible="@{viewModel.uiState.loading &amp;&amp; !viewModel.query.empty}"
+                android:layout_gravity="bottom"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedScrollView"
+                isVisible="@{viewModel.uiState.success &amp;&amp; !viewModel.query.empty}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/TitleParent"
+                        android:layout_marginTop="0dp">
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            style="@style/TitleDayNight"
+                            android:text="@string/title_movies" />
+
+                        <TextView
+                            style="@style/ListItemCount"
+                            android:text="@{@string/item_count(viewModel.movieTotalResults)}"
+                            app:layout_constraintStart_toEndOf="@id/textView2" />
+
+                        <TextView
+                            style="@style/SeeAll"
+                            intentType="@{IntentType.SEARCH}"
+                            isVisible="@{viewModel.movieTotalResults > 3}"
+                            mediaType="@{MediaType.MOVIE}"
+                            stringId="@{viewModel.query}"
+                            title="@{@string/title_see_all_search(viewModel.query, viewModel.movieTotalResults)}" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvMovies"
+                        style="@style/RecyclerView"
+                        loadMore="@{viewModel::onLoadMore}"
+                        shouldLoadMore="@{true}"
+                        type="@{MediaType.MOVIE}"
+                        android:adapter="@{fragment.adapterMovies}" />
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</layout>
